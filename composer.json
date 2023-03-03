@@ -1,0 +1,11 @@
+{
+    "name": "fourkitchens/fire-launcher",
+    "description": "Launcher for the FIRE project",
+    "license": "MIT",
+    "bin": [
+        "bin/fire"
+    ],
+    "require": {
+        "webflo/drupal-finder": "^1.2"
+    }
+}
