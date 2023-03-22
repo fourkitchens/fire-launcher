@@ -51,14 +51,14 @@ $cwd = getcwd();
 $drupalFinder = new DrupalFinder();
 
 if ($drupalFinder->locateRoot($cwd)) {
-  $root = $drupalFinder->getDrupalRoot();
   if ($version_launcher) {
     echo "Fire Launcher Version: " . FIRE_LAUNCHER_VERSION . PHP_EOL;
     exit(0);
   }
-  if (file_exists($root . '/vendor/fourkitchens/fire/')) {
-    require_once $root . '/vendor/fourkitchens/fire/bin/fire.php';
-    exit(fire_main());
+  $vendor_dir = $drupalFinder->getVendorDir() ;
+  if (file_exists($vendor_dir . '/fourkitchens/fire/')) {
+    require_once $vendor_dir . '/fourkitchens/fire/bin/fire';
+    exit(0);
   }
 }
 else {
