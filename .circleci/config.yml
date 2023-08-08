@@ -30,7 +30,7 @@ workflows:
       - push-artifact:
           filters:
             branches:
-              only: master
+              only: main
             # tags:
             #   only:
             #     - /^v.*/
