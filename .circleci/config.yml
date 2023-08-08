@@ -8,6 +8,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - gh/install
+      - run: apt update -y && apt get php -y
       - run:
           name: Install Composer.
           command: |
