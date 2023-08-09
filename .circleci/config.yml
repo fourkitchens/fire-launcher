@@ -22,6 +22,11 @@ jobs:
           name: Install box.
           command: |
             composer global require humbug/box
+      - checkout
+      - run:
+          name: Compiling Phar...
+          command: |
+             ./.config/composer/vendor/bin/box
 
 
 
