@@ -32,8 +32,7 @@ jobs:
              ./../.config/composer/vendor/bin/box compile
       - run:
           name: Pushing phar to GH release.
-          command: >
-            #!/usr/bin/env bash
+          command: |
             files="$(eval printf '%s\\n' " /home/circleci/project/fire.phar")"
             hostname="github.com"
             tag="$(eval printf '%s' "$CIRCLE_TAG")"
