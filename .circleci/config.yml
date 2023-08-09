@@ -30,9 +30,31 @@ jobs:
           command: |
              composer install
              ./../.config/composer/vendor/bin/box compile
-      - persist_to_workspace:
-          root: /home/circleci/
-          paths: project
+      - run:
+          name: Pushing phar to GH release.
+          command: >
+            #!/usr/bin/env bash
+            additional_args=""
+            files="$(eval printf '%s\\n' " /home/circleci/project/fire.phar")"
+            hostname="github.com"
+            tag="$(eval printf '%s' "$CIRCLE_TAG")"
+            token="${!GITHUB_TOKEN}"
+            [ -z "$token" ] && {
+              printf >&2 '%s\n' "A GitHub token must be supplied" "Check the \"token\" parameter."
+              exit 1
+            }
+            printf '%s\n' "export GITHUB_TOKEN=$token" >>"$BASH_ENV"
+            [ -n "$hostname" ] && printf '%s\n' "export GITHUB_HOSTNAME=$hostname"
+            >>"$BASH_ENV"
+            set -x
+            # shellcheck disable=SC2086
+            gh release upload \
+              "$tag" \
+              $files \
+              --repo "$(git config --get remote.origin.url)" \
+              $additional_args
+            set +x
+
 
 
 workflows:
@@ -40,10 +62,8 @@ workflows:
      jobs:
       - push-artifact:
           filters:
+            tags:
+              only:
+                - /^v.*/
             branches:
-              only: main
-            # tags:
-            #   only:
-            #     - /^v.*/
-            # branches:
-            #   ignore: /.*/
+              ignore: /.*/
