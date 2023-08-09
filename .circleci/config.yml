@@ -23,10 +23,12 @@ jobs:
           command: |
             composer global require humbug/box
       - checkout
+      - working_directory: /home/circleci/project
       - run:
           name: Compiling Phar...
           command: |
-             ./.config/composer/vendor/bin/box
+             composer install
+             ./../.config/composer/vendor/bin/box compile
 
 
 
