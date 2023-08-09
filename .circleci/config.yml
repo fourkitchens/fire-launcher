@@ -6,6 +6,7 @@ jobs:
   push-artifact:
     docker:
       - image: cimg/base:stable
+    working_directory: /home/circleci/project
     steps:
       - gh/install
       - run: sudo apt update -y && sudo apt install php -y
@@ -23,7 +24,6 @@ jobs:
           command: |
             composer global require humbug/box
       - checkout
-      - working_directory: /home/circleci/project
       - run:
           name: Compiling Phar...
           command: |
