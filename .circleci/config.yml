@@ -33,24 +33,7 @@ jobs:
       - run:
           name: Pushing phar to GH release.
           command: |
-            files="$(eval printf '%s\\n' " /home/circleci/project/fire.phar")"
-            hostname="github.com"
-            tag="$(eval printf '%s' "$CIRCLE_TAG")"
-            token="${!GITHUB_TOKEN}"
-            [ -z "$token" ] && {
-              printf >&2 '%s\n' "A GitHub token must be supplied" "Check the \"token\" parameter."
-              exit 1
-            }
-            printf '%s\n' "export GITHUB_TOKEN=$token" >>"$BASH_ENV"
-            [ -n "$hostname" ] && printf '%s\n' "export GITHUB_HOSTNAME=$hostname"
-            >>"$BASH_ENV"
-            set -x
-            # shellcheck disable=SC2086
-            gh release upload \
-              "$tag" \
-              $files \
-              --repo "$(git config --get remote.origin.url)"
-            set +x
+            gh release upload $CIRCLE_TAG /home/circleci/project/fire.phar --repo $(git config --get remote.origin.url)
 
 
 
