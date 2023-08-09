@@ -9,6 +9,7 @@ jobs:
     working_directory: /home/circleci/project
     steps:
       - gh/install
+      - gh/setup
       - run: sudo apt update -y && sudo apt install php -y
       - run:
           name: Install Composer.
@@ -29,7 +30,9 @@ jobs:
           command: |
              composer install
              ./../.config/composer/vendor/bin/box compile
-
+      - persist_to_workspace:
+          root: /home/circleci/
+          paths: project
 
 
 workflows:
