@@ -1,4 +1,11 @@
 Fire Launcher
+
+```
+  O      , U
+ <_\__--"-' |
+  |\  `----'
+  L
+```
 =================
 
 Launcher for FIRE project.
