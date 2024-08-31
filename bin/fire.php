@@ -8,7 +8,7 @@
 use DrupalFinder\DrupalFinder;
 
 set_time_limit(0);
-define('FIRE_LAUNCHER_VERSION', '0.1');
+define('FIRE_LAUNCHER_VERSION', '0.0.3');
 $autoloaders = [
   __DIR__ . '/../../../autoload.php',
   __DIR__ . '/../vendor/autoload.php'
