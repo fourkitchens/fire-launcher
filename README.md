@@ -1,4 +1,4 @@
-Fire Launcher
+# Fire Launcher
 
 ```
   O      , U
@@ -6,24 +6,53 @@ Fire Launcher
   |\  `----'
   L
 ```
-=================
 
-Launcher for FIRE project.  
+## About
 
-Intelligently finds the fire commands for the current project. 
+The FIRE Launcher is a command-line utility that streamlines the execution of 
+[FIRE (Fast Initialization and Rebuilding of Environments)](https://github.com/fourkitchens/fire/) 
+scripts within your projects. By typing `fire <command>`, this tool dynamically loads 
+and runs the appropriate FIRE scripts for the current project, eliminating the need 
+for global installations. It simplifies your workflow by providing a consistent 
+interface to manage environment setup and project-specific tasks, ensuring rapid 
+and efficient development processes.
 
-### Installing
-- Go to the following page https://github.com/fourkitchens/fire-launcher/releases
-- Find the release you are interested in and download the attached fire.phar file.
-- Now using your terminal go to your downloads folder.
-- Now execute `chmod +x fire.phar`
-- And Finally `mv fire.phar /usr/local/bin/fire`
-- now you should be able to trigger the command `fire` from any directory in your terminal.
+## Installing
 
-### Compiling
+Download the latest stable release or 
+[browse all releases](https://github.com/fourkitchens/fire-launcher/releases) 
+to download specific fire.phar file:
 
-If you are making changes to the Fire Launcher, you can follow this instructions from this source repo.
-Uses [box](https://github.com/box-project/box) to compile the project.
+```Shell
+curl -s https://api.github.com/repos/fourkitchens/fire-launcher/releases/latest \
+| grep "browser_download_url.*fire.phar" \
+| cut -d '"' -f 4 \
+| xargs -I {} curl -L -o fire.phar {}
+```
+
+```Shell
+wget $(curl -s https://api.github.com/repos/fourkitchens/fire-launcher/releases/latest \
+| grep "browser_download_url.*fire.phar" \
+| cut -d '"' -f 4) -O fire.phar
+```
+
+Navigate to the fire.phar file in your terminal to move this file to a globally 
+executable space. On Ubuntu and Other Unix-like Systems (Linux, macOS):
+
+```Shell
+# Make the file executable
+chmod +x fire.phar
+# Move the file to a directory in your PATH, such as /usr/local/bin:
+mv fire.phar /usr/local/bin/fire
+```
+
+You should now be able to trigger the `fire` command from any directory into you terminal.
+
+
+## Compiling
+
+If you are making changes to the Fire Launcher, you can use [box](https://github.com/box-project/box) 
+to compile the project:
 
 - go to the project root
 - execute the command ```box compile```. It should generate a fire.phar file
